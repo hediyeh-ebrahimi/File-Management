@@ -24,9 +24,12 @@
         </h:form>
 
         <h:dataTable value="#{index.images}" var="image"
-                     styleClass="table"
-                     headerClass="imageTableHeader"
-                     rowClasses="imageTableOddRow,imageTableEvenRow">
+
+                     rows="10"
+                     paginator="true"
+                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                     currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                     rowsPerPageTemplate="1,5,10,{ShowAll|'All'}">
 
             <h:column headerClass="col">
                 <f:facet name="header">Name</f:facet>
@@ -54,6 +57,24 @@
                 <f:facet name="header">CreateDate</f:facet>
                 #{image.createdDate}
             </h:column>
+
+            <h:column headerClass="col">
+                <f:facet name="header">Delete</f:facet>
+                <h:form>
+                    <h:commandLink action="#{index.deleteImage(image)}">
+                        <h:button styleClass="btn btn-danger" value="Del"></h:button>
+                    </h:commandLink>
+                </h:form>
+
+            </h:column>
+
+<!--            <f:facet name="paginatorTopLeft">-->
+<!--                <h:commandButton type="button" icon="pi pi-refresh"/>-->
+<!--            </f:facet>-->
+
+<!--            <f:facet name="paginatorBottomRight">-->
+<!--                <h:commandButton type="button" icon="pi pi-cloud-upload"/>-->
+<!--            </f:facet>-->
         </h:dataTable>
 
     </h:panelGroup>

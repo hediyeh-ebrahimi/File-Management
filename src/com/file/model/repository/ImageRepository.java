@@ -20,17 +20,12 @@ public class ImageRepository {
 
     @Transactional
     public void insert(Image image){
-//        image.setImageName("11");
-//        image.setOriginalImageName("22");
-//        image.setCreatedDate(LocalDate.now());
-//        image.setExtension("png");
-//        image.setVolume(12L);
-        System.out.println("----------22--------"+image.getImageName());
-        System.out.println("----------23--------"+image.getExtension());
-        System.out.println("----------24--------"+image.getOriginalImageName());
-        System.out.println("----------25--------"+image.getCreatedDate());
-        System.out.println("----------26--------"+image.getVolume());
-        System.out.println("----------27--------"+image.getImageId());
         this.entityManger.persist(image);
+    }
+
+    @Transactional
+    public void delete(Image image) {
+        this.entityManger.remove(this.entityManger.contains(image) ? image : this.entityManger.merge(image));
+
     }
 }

@@ -14,7 +14,6 @@ public class ImageService {
 
     @Autowired
     public ImageService(ImageRepository imageRepository) {
-        System.out.println("----------**************888888-----------------");
         this.imageRepository = imageRepository;
     }
 
@@ -24,5 +23,9 @@ public class ImageService {
 
     public void save(Image image){
         this.imageRepository.insert(image);
+    }
+
+    public void delete(Image image) {
+        this.imageRepository.delete(image);
     }
 }

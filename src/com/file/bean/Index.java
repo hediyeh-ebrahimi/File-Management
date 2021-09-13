@@ -122,5 +122,26 @@ public class Index {
         return "index";
     }
 
+    public String deleteImage(Image image){
+        String imageName = image.getImageName();
+        String uploadDir = "F:\\java_tutorial\\file-Management\\web\\resources\\images";
+        String cachedDir = FacesContext.getCurrentInstance().getExternalContext().getRealPath("")+
+                File.separator +"resources" + File.separator + "images";
+
+        try {
+            Files.delete(Paths.get(uploadDir+"\\"+imageName));
+            Files.delete(Paths.get(cachedDir+"\\"+imageName));
+
+            this.imageService.delete(image);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        this.images =  this.imageService.findAll();
+        return "index";
+    }
+
 
 }
